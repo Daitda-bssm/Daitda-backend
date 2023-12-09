@@ -6,6 +6,50 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+}
+
+enum Field {
+  BACKEND
+  FRONTEND
+  DESIGN
+  APP
+  IMBEDED
+  AI
+}
+
+enum Major {
+  SOFTWARE
+  IMBEDED
+}
+
+model User {
+  userCode   Int     @id
+  name       String
+  role       Role
+  profileUrl String?
+}
+
+model Portfolio {
+  userCode    Int     @id
+  name        String
+  profileUrl  String?
+  intro       String?
+  field       Field
+  major       Major
+  grade       Int
+  framework   String
+  github      String
+  notion      String
+  velog       String
+  skill       String
+  project     String
+  award       String
+  certificate String
 }
