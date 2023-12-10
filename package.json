@@ -28,6 +28,7 @@
     "dotenv": "^16.3.1",
     "express-asyncify": "^2.1.2",
     "global": "^4.4.0",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0"
   }
 }
