@@ -8,14 +8,16 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/api", (req: Request, res: Response, next: NextFunction) => {
-  res.send("welcome!");
+const router = express.Router();
+router.get("/api", (req, res, next) => {
+  res.json({ message: "welcome!" });
 });
 
+app.use("/", router);
 app.listen(PORT, () => {
   console.log(`
   ################################################
-  🛡️  Server listening on port: ${PORT}🛡️
+  🛡️  Server listening on port: ${PORT}  🛡️
   ################################################
 `);
 });
