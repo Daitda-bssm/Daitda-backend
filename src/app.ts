@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 
 import AuthController from "./controller/AuthController";
+import PortfolioController from "./controller/PortfolioController";
 
 import { errorLogger, errorResponser } from "./middleware/errorHandler";
 
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/auth", AuthController);
+app.use("/portfolio", PortfolioController);
 
 app.use(errorLogger);
 app.use(errorResponser);
