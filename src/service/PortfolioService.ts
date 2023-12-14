@@ -7,16 +7,10 @@ export const upsertPortfolio = async (portfolio: Portfolio) => {
   return { message: "성공" };
 };
 
-export const getAllPortfolio = async () => {
-  const allPortfolio = await PortfolioRepository.findAll();
-
-  return { message: "성공", data: allPortfolio };
-};
-
-export const getSomePortfolio = async (param?: any) => {
-  const somePortfolio = await PortfolioRepository.findSome(param);
-
-  return { message: "성공", data: somePortfolio };
+export const getPortfolioList = async (param?: any) => {
+  const manyPortfolio = await PortfolioRepository.findMany(param);
+  console.log(param, manyPortfolio);
+  return { message: "성공", data: manyPortfolio };
 };
 
 export const getUniquePortfolio = async (userCode: number) => {

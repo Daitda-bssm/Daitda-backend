@@ -29,7 +29,7 @@ router.post("/", async (req: Request, res: Response) => {
     return;
   }
 
-  const token = authorization.split("Bearer ")[1];
+  const token = authorization;
   const decodedJwt = jwtDecode<{ userCode: number }>(token);
 
   const portfolio = {
@@ -56,20 +56,14 @@ router.post("/", async (req: Request, res: Response) => {
 });
 
 router.get("/", async (req: Request, res: Response) => {
-  const response = await PortfolioService.getAllPortfolio();
+  const param = req.query;
+
+  const response = await PortfolioService.getPortfolioList(param);
 
   return res.status(200).send(response);
 });
 
-router.get("/", async (req: Request, res: Response) => {
-  const { param } = req.query;
-
-  const response = await PortfolioService.getSomePortfolio(param);
-
-  return res.status(200).send(response);
-});
-
-router.get("/", async (req: Request, res: Response) => {
+router.get("/:userCode", async (req: Request, res: Response) => {
   const { userCode } = req.params;
 
   const response = await PortfolioService.getUniquePortfolio(Number(userCode));

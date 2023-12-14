@@ -16,27 +16,34 @@ export const upsert = async (portfolio: Portfolio) => {
   return result;
 };
 
-export const findAll = async () => {
-  const result = await prisma.portfolio.findMany();
-  return result;
-};
+export const findMany = async (param?: any) => {
+  if (!param) {
+    return prisma.portfolio.findMany();
+  }
 
-export const findSome = async (param?: any) => {
+  const whereClause: any = {};
+  if (param.grade) {
+    whereClause.grade = {
+      in: [Number(param.grade)],
+    };
+  }
+  if (param.field) {
+    whereClause.field = {
+      in: [param.field],
+    };
+  }
+  if (param.framework) {
+    whereClause.framework = {
+      in: [param.framework],
+    };
+  }
+  if (param.name) {
+    whereClause.name = {
+      in: [param.name],
+    };
+  }
   return prisma.portfolio.findMany({
-    where: {
-      grade: {
-        in: param.grade,
-      },
-      field: {
-        in: param.field,
-      },
-      framework: {
-        in: param.framework,
-      },
-      name: {
-        in: param.name,
-      },
-    },
+    where: whereClause,
   });
 };
 
@@ -46,5 +53,6 @@ export const findUnique = async (userCode: number) => {
       userCode: userCode,
     },
   });
+
   return result;
 };
