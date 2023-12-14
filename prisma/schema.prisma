@@ -37,7 +37,7 @@ model Portfolio {
   userCode    Int     @id
   name        String
   profileUrl  String?
-  intro       String?
+  intro       String
   field       Field
   major       Major
   grade       Int

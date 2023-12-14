@@ -24,26 +24,7 @@ export const login = async (code: string) => {
 
     await UserRepository.upsert(userInformarion);
 
-    const accessToken = jwt.sign({ userCode, role }, JWT_SECRET_KEY, {
-      expiresIn: "30m",
-    });
-
-    return { message: "로그인 성공", data: { accessToken } };
-  }
-  if (resource.role === BsmUserRole.TEACHER) {
-    const { userCode, profileUrl, role } = resource;
-    const { name } = resource.teacher;
-
-    const userInformarion = {
-      userCode: userCode,
-      name: name,
-      role: role,
-      profileUrl: profileUrl ?? "",
-    };
-
-    await UserRepository.upsert(userInformarion);
-
-    const accessToken = jwt.sign({ userCode, role }, JWT_SECRET_KEY, {
+    const accessToken = jwt.sign({ userCode }, JWT_SECRET_KEY, {
       expiresIn: "30m",
     });
 
